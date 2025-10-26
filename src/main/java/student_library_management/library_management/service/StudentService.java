@@ -19,16 +19,21 @@ public class StudentService {
     public Student saveStudent(Student student){
         return studentRepository.save(student);
     }
-    
+
     // Save multiple students at once
     public List<Student> saveAllStudents(List<Student> students) {
         return studentRepository.saveAll(students);
     }
-    // find all student data
 
+    // find all student data
     public List <Student> getAllStudent(){
-        return studentRepository.findAll();
+       List<Student> studetList= studentRepository.findAll();
+       if(studetList.isEmpty()) {
+           throw new RuntimeException("Student list is empty");
+       }
+       return studetList;
     }
+    //Add pagination
     public List<Student>  getStudentByPagination(int pageNo, int pageSize, Sort name){
         List <Student> studentList = studentRepository.findAll(PageRequest.of(pageNo, pageSize)).getContent();
         return studentList;

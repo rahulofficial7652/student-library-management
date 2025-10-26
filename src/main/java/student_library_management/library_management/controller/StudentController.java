@@ -26,8 +26,14 @@ public class StudentController {
     }
     @GetMapping("/findAll")
     public List<Student> findAllStudents(){
-        List <Student> studentList  = studentService.getAllStudent();
-        return studentList;
+       try{
+           List <Student> studentList  = studentService.getAllStudent();
+           return studentList;
+       }
+       catch (Exception e){
+           System.out.println("Expection Occure" + e.getMessage());
+           return null;
+       }
     }
     @GetMapping("/findByPage")
     public List<Student> findPagination(@RequestParam int pageNo, @RequestParam int pageSize){
